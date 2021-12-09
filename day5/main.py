@@ -24,12 +24,12 @@ def cmp(a, b):
         return 1
 
 
-def points_for_line(start, end):
+def points_for_line(start, end, diagonal=True):
     length = max(abs(start[0] - end[0]), abs(start[1] - end[1])) + 1
     x_diff = -1 * cmp(start[0], end[0])
     y_diff = -1 * cmp(start[1], end[1])
 
-    if x_diff and y_diff:
+    if x_diff and y_diff and not diagonal:
         return
 
     for i in range(length):
