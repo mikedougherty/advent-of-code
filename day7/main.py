@@ -1,13 +1,11 @@
 import sys
 
-FUEL = 1
-
 
 def cost_to_align(x, positions):
     cost = 0
     for p in positions:
         distance = abs(x - p)
-        cost += FUEL * distance
+        cost += sum(range(1, distance + 1))
     return cost
 
 
