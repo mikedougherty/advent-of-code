@@ -52,6 +52,7 @@ def main(input_file, iterations):
 
     height = len(octopi)
     width = len(octopi[0])
+    all_flashed = -1
 
     print("start:")
     print_grid(octopi)
@@ -93,12 +94,16 @@ def main(input_file, iterations):
         for (row, col) in flashed:
             octopi[row][col] = 0
 
+        if len(flashed) == (height * width) and all_flashed == -1:
+            all_flashed = _ + 1
+
         print(
             f"For iteration {_} we had {round_iterations} sub-iterations and {len(flashed)} flashed. Total flashes is now {total_flashers}"
         )
         print_grid(octopi)
 
     print(f"After {iterations} iterations, {total_flashers} flashes occured")
+    print(f"The first time all flashed together was iteration {all_flashed}")
     print_grid(octopi)
 
 
