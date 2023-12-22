@@ -1,4 +1,7 @@
 import dataclasses
+import functools
+import math
+import multiprocessing
 import sys
 
 @dataclasses.dataclass
@@ -89,6 +92,18 @@ class WorkflowEngine:
             dest = self.workflows[dest].apply(part)
         return dest
 
+    def score(self, input):
+        part_args, score = input
+        return score * (self.apply(Part(*part_args)) == 'A')
+
+
+def part_intervals(ch_intervals):
+    for x_int_start, x_int_sz in ch_intervals['x']:
+        for m_int_start, m_int_sz in ch_intervals['m']:
+            for a_int_start, a_int_sz in ch_intervals['a']:
+                for s_int_start, s_int_sz in ch_intervals['s']:
+                    yield (x_int_start, m_int_start, a_int_start, s_int_start), x_int_sz * m_int_sz * a_int_sz * s_int_sz
+
 
 def main(input_file):
     engine = WorkflowEngine()
@@ -116,18 +131,39 @@ def main(input_file):
     print(total)
 
     ## Part 2
-    # total = 0
-    # for x in range(1, 4001):
-    #     for m in range(1, 4001):
-    #         for a in range(1, 4001):
-    #             print(x, m, a)
-    #             for s in range(1, 4001):
-    #                 part = Part(x, m, a, s)
-    #                 if engine.apply(part) == 'A':
-    #                     total += sum(vars(part).values())
+    ch_segments = {ch: [0, 4000] for ch in 'xmas'}
+    all_rules = [r for w in engine.workflows.values() for r in w.rules]
+    for rule in all_rules:
+        if rule.condition:
+            # for 'x<1000' this appends 999 to the list of x segments
+            # for 'y>1000' this appends 1000 to the list of y segments
+            ch_segments[rule.field].append(rule.target - (1 if rule.operation == '<' else 0))
 
-    # print(total)
+    for ch in ch_segments:
+        ch_segments[ch].sort()
 
+    # Now create the list of interval start points and their sizes
+    # so for a list of segments [0, 500, 1500]
+    # we get [(0, 500), (500, 1000)]
+    ch_intervals = {ch: [(end, end-start) for start, end in zip(ch_segments[ch], ch_segments[ch][1:])] for ch in 'xmas'}
+
+    total = 0
+    # Iterate over each set of ranges, creating each different "range combination"
+    # instead of iterating over individual values
+    i = 0
+    print("intervals:")
+    for ch in 'xmas':
+        print(ch, len(ch_intervals[ch]))
+    iterations = functools.reduce(lambda a, b: a * b, [len(v) for v in ch_intervals.values()], 1)
+    print(f"Total expected iterations: {iterations}")
+
+    with multiprocessing.Pool(8) as pool:
+        for i, score in enumerate(pool.imap_unordered(engine.score, part_intervals(ch_intervals), chunksize=100000)):
+            if i % 10000000 == 0:
+                print(f"{math.floor(i/iterations * 100)} {i=} {score=} {total=}")
+            total += score
+
+    print(total)
 
 
 if __name__ == "__main__":
