@@ -1,0 +1,121 @@
+graph "aoc" {
+  broadcaster [shape=plaintext]
+
+  bk [shape=box] ;
+  db [shape=box] ;
+  ln [shape=box] ;
+  pt [shape=box] ;
+  tf [shape=box] ;
+  tg [shape=box] ;
+  tp [shape=box] ;
+  vd [shape=box] ;
+  vq [shape=box] ;
+  bd [shape=oval] ;
+  cg [shape=oval] ;
+  cm [shape=oval] ;
+  cn [shape=oval] ;
+  cx [shape=oval] ;
+  dj [shape=oval] ;
+  dk [shape=oval] ;
+  dr [shape=oval] ;
+  fl [shape=oval] ;
+  gc [shape=oval] ;
+  gg [shape=oval] ;
+  gp [shape=oval] ;
+  gr [shape=oval] ;
+  hq [shape=oval] ;
+  hx [shape=oval] ;
+  jc [shape=oval] ;
+  jh [shape=oval] ;
+  jt [shape=oval] ;
+  jx [shape=oval] ;
+  kg [shape=oval] ;
+  km [shape=oval] ;
+  lf [shape=oval] ;
+  lm [shape=oval] ;
+  lp [shape=oval] ;
+  lr [shape=oval] ;
+  lv [shape=oval] ;
+  mn [shape=oval] ;
+  mv [shape=oval] ;
+  nb [shape=oval] ;
+  ps [shape=oval] ;
+  ql [shape=oval] ;
+  qr [shape=oval] ;
+  rf [shape=oval] ;
+  rg [shape=oval] ;
+  rm [shape=oval] ;
+  rq [shape=oval] ;
+  sb [shape=oval] ;
+  sd [shape=oval] ;
+  sj [shape=oval] ;
+  sk [shape=oval] ;
+  st [shape=oval] ;
+  tr [shape=oval] ;
+  vg [shape=oval] ;
+  vj [shape=oval] ;
+  vp [shape=oval] ;
+  xf [shape=oval] ;
+  xh [shape=oval] ;
+  zx [shape=oval] ;
+
+  broadcaster -> km, lr, xh, rf
+
+  vg -> lf, vd
+  dr -> kg
+  cn -> mv, pt
+  rq -> bk, gr
+  vp -> lp, bk
+  kg -> lv
+  lv -> jc, tp
+  sj -> rm, vd
+  jc -> tp, qr
+  km -> tp, dr
+  jx -> cn
+  vd -> tf, lf, nb, cx, hx, lr
+  lp -> jt, bk
+  vj -> ps
+  dj -> pt, gc
+  cg -> vd, hx
+  ln -> tg
+  fl -> pt, sk
+  lm -> tr, bk
+  lr -> vd, vg
+  pt -> vq, rf, cm, jx, rg
+  cx -> gp
+  gp -> vd, sj
+  db -> tg
+  st -> vd
+  jt -> bk
+  jh -> lm, bk
+  xf -> bd, tp
+  gc -> cm, pt
+  tp -> dr, km, kg, db, vj, qr
+  ps -> xf, tp
+  rf -> pt, dj
+  lf -> nb
+  bd -> tp, gg
+  dk -> tp, vj
+  mn -> jh, bk
+  tg -> rx
+  ql -> bk, zx
+  tr -> bk, vp
+  sk -> pt
+  nb -> cg
+  sb -> vd, cx
+  qr -> dk
+  xh -> bk, ql
+  rg -> sd
+  hx -> sb
+  sd -> pt, jx
+  gr -> bk, mn
+  gg -> tp
+  zx -> rq
+  bk -> xh, ln, zx
+  rm -> st, vd
+  hq -> fl, pt
+  vq -> tg
+  cm -> rg
+  tf -> tg
+  mv -> pt, hq
+}
